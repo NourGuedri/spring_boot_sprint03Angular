@@ -1,0 +1,41 @@
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<!-- Brand -->
+<a class="navbar-brand" href="#">Gestion des Plantes</a>
+<!-- Links -->
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link" routerLink="/plantes" >Home</a>
+</li>
+<!-- Dropdown -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" id="navbardrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  Plantes
+</a>
+<div class="dropdown-menu">
+<a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/add-plante">Ajouter</a>
+<a class="dropdown-item" href="#">Lister</a>
+<a class="dropdown-item" routerLink="/rechercheParType" >Recherche Par Type</a>
+<a class="dropdown-item" routerLink="/rechercheParNom" >Recherche Par Nom</a>
+<a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/listeTypes" >Gestion des types</a>
+
+
+
+</div>
+</li>
+</ul> 
+<ul class="navbar-nav ms-auto m-2" >
+  <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  {{authService.loggedUser ? authService.loggedUser : 'Connection'}}
+  </a>
+  <div class="dropdown-menu">
+    <a *ngIf="!authService.islogin()" class="dropdown-item" routerLink = "login" >login</a>
+    <a *ngIf="authService.islogin()" class="dropdown-item" (click) = "onLogout()" style="cursor: pointer;">logout</a>
+  <a class="dropdown-item" href="#">Profile</a>
+  </div>
+  </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>

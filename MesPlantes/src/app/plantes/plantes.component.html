@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="card shadow mb-4">
+    <div class="card-body">
+    <table class="table table-striped">
+    <thead>
+    <tr> <th>Id</th><th>Nom</th> <th>Couleur</th> <th>Date rendez-vous</th><th>Type</th><th>Image</th><th *ngIf="authService.isAdmin()">Actions</th> </tr>
+</thead>
+<tbody *ngFor="let plante of plantes">
+    <tr >
+    <td>{{plante.idPlante}}</td>
+    <td>{{plante.nomPlante}}</td>
+    <td>{{plante.couleur}}</td>
+    <td>{{plante.dateRendezVous | date:'dd/MM/yyyy'}}</td>
+    <td>{{plante.type.nomType}}</td>
+    <td><img class="card-img-top img-responsive"
+        src = "{{plante.imageStr}}"
+        style = "height :50px;width:100px">
+     </td>
+<!-- hatit ? aal type bech ki yabda null me ytalaalich erreur -->    
+ <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerPlante(plante)">Supprimer</a></td>
+<td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updatePlante',plante.idPlante]">Modifier</a></td>
+    </tr>
+</tbody>
+    </table>
+    </div>
+    </div>
+    </div>

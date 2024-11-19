@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="card shadow mb-4">
+    <div class="card-body">
+    <table class="table table-striped">
+    <tr> <th>Id</th><th>Nom</th> <th>Couleur</th> <th>Date rendez-vous</th><th>Type</th><th *ngIf="authService.isAdmin()">Actions</th> </tr>
+    <tbody *ngFor="let plante of plantes">
+    <tr >
+    <td>{{plante.idPlante}}</td>
+    <td>{{plante.nomPlante}}</td>
+    <td>{{plante.couleur}}</td>
+    <td>{{plante.dateRendezVous | date:'dd/MM/yyyy'}}</td>
+    <td>{{plante.type.nomType}}</td>
+<!-- hatit ? aal type bech ki yabda null me ytalaalich erreur -->    <td *ngIf="authService.isAdmin()"><a class="btn btn-danger" (click)="supprimerPlante(plante)">Supprimer</a></td>
+    <td *ngIf="authService.isAdmin()"><a class="btn btn-success" [routerLink]="['/updatePlante',plante.idPlante]">Modifier</a></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Types </label>
+        <select class="form-control form-control-lg" id="idType" name="idType"
+        [(ngModel)]="IdType" (change)="onChange()">
+        <option *ngFor="let type of types" value="{{type.idType}}">
+        {{type.nomType}}
+         </option>
+        </select>
+        </div>
+    </div>
